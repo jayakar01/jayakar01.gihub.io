@@ -4,13 +4,16 @@ let markers = [];
 function initMap() {
 	const options = {
 		center: {
-			lat: 20.147993,
-			lng: 85.670953
+			lat: 20.147996,
+			lng: 85.670970
 		},
-		zoom: 15
+		zoom: 15.1
 	};
 	map = new google.maps.Map(document.getElementById('map'), options);
 };
+
+// lat: 20.147993,
+// lng: 85.670953
 
 function initMarkers() {
 	let numOfMarkers = allUsers.length
