@@ -42,7 +42,8 @@ function addMarker(userData){
 		position: userData.location.location,
 		map: map,
 		// types and icons defined in map utilities.
-		icon: icons[types[userData.destination].type].icon
+		icon: `http://maps.google.com/mapfiles/kml/paddle/${i + 1}.png`
+		//icons[types[userData.destination].type].icon
 	});
 	let contentString = '<strong> Destination : </strong>'+'<strong>'+userData.destination+'</strong>';
 
