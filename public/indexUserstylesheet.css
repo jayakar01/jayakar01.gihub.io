@@ -56,7 +56,7 @@
         .card-deck{
             margin : 5px 15px 25px 15px;
             height : 16vh; 
-            font-size : 1.5vw;
+            font-size : 2.3vmin;
 
         }
 
@@ -79,6 +79,7 @@
         }
         .card-text {
             height : 23%;
+            margin-bottom : 0.4vmin;
             /* margin-bottom : 0px; */
             /* font-size : 100%; */
         }
