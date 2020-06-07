@@ -38,7 +38,7 @@
         }
         h6{
             font-weight : bold;
-            font-size : 3.0vmin;
+            font-size : 2.5vmin;
         }
         #BOOKbutton {
            background-color: #563D7C!important;
@@ -55,8 +55,8 @@
             height: 5.5vh;
         }
         .card-deck{
-            margin : 1vh 0.5vw 1.5vh 0.5vw;
-            height : 16vh; 
+            margin : 1vh 0.5vw 1vh 0.5vw;
+            height : 15vh; 
             font-size : 2.5vmin;
 
         }
