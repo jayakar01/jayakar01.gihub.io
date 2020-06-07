@@ -55,7 +55,7 @@
         }
         .card-deck{
             margin : 5px 15px 25px 15px;
-            height : 18vh; 
+            height : 16vh; 
             font-size : 1.5vh;
 
         }
@@ -75,7 +75,7 @@
         .card-title{
             text-align: center;
             height : 20%;
-            margin: 0.5vh 0.2vh 0.5vh 0.2vh;
+            margin: 0vh 0.2vh 0.8vh 0.2vh;
         }
         .card-text {
             height : 23%;
