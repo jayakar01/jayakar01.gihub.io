@@ -11,7 +11,6 @@
 
 
     <!--Views-->
-    <script src="./views/driverInfoView.js"></script>
     <script src="./views/userLocation.js"></script>
     <script src="./views/userMap.js"></script>
     <script src="./views/userSocket.js"></script>
@@ -20,16 +19,13 @@
     
 
     <!--Controllers-->
-    <script src="./controllers/driverInfoController.js"></script>
     <script src="./controllers/userController.js"></script>
     <script src="./controllers/cookiesController.js"></script>
 
     <!--Models-->
     <script src="./models/userModel.js"></script>
-    <script src="./models/driverInfoModel.js"></script>
 
     <title>Vehicle Tracking System</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
@@ -87,13 +83,52 @@
     <div class="container-fluid">
         <div id="map"></div>
     </div>
-    <div class="container-fluid" id="bovDetails">
-        <div class="row">
+    <!-- <div class="container-fluid" id="bovDetails">
+        <div class = "row" id = "none">
+            <p>Sorry no drivers active at this moment.</p>
+        </div>
+        <div class="row" style = "display: none" id="driverDisplay">
             <div class="col-sm" id="bov1" style=" background-color:white">
                 <h4 id="bov1h4">Destination : LBC</h4>
                 <h4 id="bov1h5">Seats Occupied : 5</h4>
                 <h4 id="bov1h5">Status : Active</h4>
             </div>
+        </div>
+    </div> -->
+
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">BOV 1</h6>
+              <p class="card-text"><strong>Destination : </strong>MBLD</p>
+              <p class="card-text"><strong>Seats Occupied :</strong> 4</p>
+              <p class="card-text"><strong>Status :</strong> Active</p>
+            </div>
+            <!-- <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div> -->
+        </div>
+        <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">BOV 2</h6>
+              <p class="card-text"><strong>Destination :</strong> MBLD</p>
+              <p class="card-text"><strong>Seats Occupied :</strong> 4</p>
+              <p class="card-text"><strong>Status :</strong> Active</p>
+            </div>
+            <!-- <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div> -->
+        </div>
+        <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">BOV 3</h6>
+              <p class="card-text"><strong>Destination :</strong> MBLD</p>
+              <p class="card-text"><strong>Seats Occupied :</strong> 4</p>
+              <p class="card-text"><strong>Status :</strong> Active</p>
+            </div>
+            <!-- <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div> -->
         </div>
     </div>
 

@@ -36,14 +36,55 @@
         h4{
             font-size : 0.9rem;
         }
-      
+        h6{
+            font-weight : bold;
+        }
         #BOOKbutton {
            background-color: #563D7C!important;
             height: 5.5vh;
-            margin-top:0.2vh;
+            margin-top: 0.2vh;
             margin-left: 15vw;
             margin-right: 15vw;
         } 
+
+        .card-deck{
+            margin : 5px 15px 25px 15px;
+            height : 18vh; 
+            font-size : 1.6vh;
+
+        }
+
+        .card{
+            background-color:#ede7f6!important;
+            height : 100%;
+        }
+
+        .card-body{
+            /* margin : 5px 5px 5px 5px; */
+            height : 100%; 
+            /* padding-bottom: 0px; */
+            padding: 15px 15px 15px 15px;
+        }
+
+        .card-title{
+            text-align: center;
+            height : 20%;
+            margin: 0.5vh 0.2vh 0.5vh 0.2vh;
+        }
+        .card-text {
+            height : 23%;
+            /* margin-bottom : 0px; */
+            /* font-size : 100%; */
+        }
+        
+        p{
+            display: block;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+        
         /* Optional: Makes the sample page fill the window. */
         
         .row {
@@ -59,3 +100,10 @@
             margin: 0;
             padding: 0;
         }
+
+    /*Styling the dialog box above the marker*/
+    .gm-style .gm-style-iw {
+        font-weight: 300;
+        font-size: 2vh;
+        overflow: hidden;
+    }

@@ -1,66 +1,96 @@
-
+//This file contains all the socket listeners for driver.
 //Updates driver information to all socket clients
 function updateDriverInfo() {   
-	socket.broadcast.emit('updateDriverData',driverData);
-	console.log('updated Driver data');
+	const driverData = JSON.parse(localStorage.getItem('driverData'));
+	socket.emit('updateDriverData',driverData);
+	console.log('Calling for driver update');
+	updateDriverStatus(driverData);
 	//Driver object
 	//socket.emit('updateDriverInfo',{ id: driverID, occupiedSeats: occupiedseats, colorCode: colorCode });
 }
 
 function updateDriverLocation(){
+	const driverData = JSON.parse(localStorage.getItem('driverData'));
 	socket.emit('updateDriverLocation',driverData);
+	updateDriverMarker(driverData);
 }
 
-//Storing the base data and adding markers to map.
-socket.on('connectionResponse', (data) => {
+function setupSocketDriver(){
 
-	//Arrays declared in driverSocket
-	allUsers = data.userList;
-	allDrivers = data.driverList;
+	//Storing the base data and adding markers to map.
+	
+	socket.on('connectionResponse', (data) => {
 
-	// Defined in userMap.js adds the markers of users and drivers
-	initMarkers();
+		//Arrays declared in driverSocket
+		allUsers = data.userList;
+		allDrivers = data.driverList;
+		console.log('All users :' + allUsers);
+		console.log('All Drivers : ' + allDrivers);
+		// Defined in userMap.js adds the markers of users and drivers
+		initMarkers();
+		console.log(allDrivers);
+	});
 
-	console.log(allDrivers);
-});
+	socket.on('addUser', (user) => {
+		allUsers.push(user);
+		addMarker(user);
+		console.log(`Added User ${user.id} in user array`);
+	});
+	socket.on('removeUser', (user) => {
+		//removing the user marker in map
+		removeUserMarker(user);
+		//removing user from the user list
+		const index = allUsers.findIndex(member => member.id == user.id);
+		allUsers.splice(index, 1);
 
-socket.on('addUser', (user) => {
-	allUsers.push(user);
-	addMarker(user);
-	console.log(`Added User ${user.id} in user array`);
-});
-socket.on('removeUser', (user) => {
-	//removing the user marker in map
-	removeMarker(user);
-	//removing user from the user list
-	const index = userList.findIndex(member => member.id == user.id);
-	userList.splice(index, 1);
+		console.log(`Removed User ${user.id} from user array`);
 
-	console.log(`Removed User ${user.id} from user array`);
+	});
 
-});
+	//Listening to socket calls
 
-//Listening to socket calls
+	//Add new driver marker to map
+	socket.on('addDriver',(driverData)=>{
+		console.log(driverData);
+		if(JSON.parse(localStorage.getItem('driverData'))==null){
+			console.error("Something is wrong");
+		}
+		else{
+			var sessionDriver = JSON.parse(localStorage.getItem('driverData'));
+			if(sessionDriver.phoneNumber === driverData.phoneNumber){
+				console.log('Driver you are marked active in db.');
+				sessionDriver.timeStamp = driverData.timeStamp;
+				localStorage.setItem('driverData', JSON.stringify(sessionDriver));
+				console.log("Driver marker added.")
+			}
+			addDriverMarker(driverData);
+			allDrivers.push(driverData);
+		}
+		console.log("Added driver with phoneNumber : " + driverData.phoneNumber);
+	})
 
-//Add new driver marker to map
-socket.on('addDriver',(driverData)=>{
-	addDriverMarker(driverData);
-	allDrivers.push(driverData);
-})
+	//Remove driver from the map
+	socket.on('removeDriver',(driverData)=>{
+		removeDriverMarker(driverData);
+		const index = allDrivers.findIndex(driver=> driver.phoneNumber == driverData.phoneNumber)
+		allDrivers.splice(index,1);
+	})
 
-//Remove driver from the map
-socket.on('removeDriver',(driverData)=>{
-	removeMarker(driverData);
-	const index = allDrivers.findIndex(driver=> driver.id == driverData.id)
-	allDrivers.splice(index,1);
-})
+	//Update Location of the driver marker
+	socket.on('updateDriverLocation',(driverData)=>{
+		//console.log("Calling updateDriverMarker function.");
+		updateDriverMarker(driverData);
+	});
 
-//Update Location of the driver marker
-socket.on('updateDriverLocation',(driverData)=>{
-	updateDriverMarker(driverData);
-});
+	//Update the Colour of the marker if needed.
+	socket.on('updateDriverData',(driverData)=>{
+		updateDriverStatus(driverData);
+	});
 
-//Update the Colour of the marker if needed.
-socket.on('updateDriverData',(driverData)=>{
-	updateMarkerStatus(driverData);
-});
+	socket.on('driverAuthFailed',(data)=> {
+		alert("Session expired please login again.");
+		// Might need to add socket event to remove driver need to cross-check...
+		localStorage.removeItem('driverData');
+		window.location.href = "./driverSignUp.html";	
+	})
+}

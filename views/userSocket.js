@@ -1,24 +1,29 @@
 // Make Connection
-let socket = io.connect('http://localhost:3000');
+let socket = io.connect('https://vts189.herokuapp.com');
 let allUsers = [];
 let allDrivers = [];
 let uniqueId;
 const interval = 20;
-let dummyUser={
-	id: 'SDSFBJQ34724tu',
-	location :{
-		pickupPoint : 'MBLD',
-		location : {lat:20.148816, lng:85.671412}
-	},
-	destination : 'SHR'
-}
+// let dummyUser={
+// 	id: 'SDSFBJQ34724tu',
+// 	location :{
+// 		pickupPoint : 'MBLD',
+// 		location : {lat:20.148816, lng:85.671412}
+// 	},
+// 	destination : 'SHR'
+// }
 
+//function call in userMap.js
+function after_init_map_user(){
 $(document).ready(async function () {
+	
+	//localStorage.removeItem('driverData');
+
 	// Send the request for base data
 	socket.emit('onConnection');
 
-	addMarker(dummyUser);
-	console.log('Marker Added');
+	//addMarker(dummyUser);
+	//console.log('Marker Added');
 	if(JSON.parse(localStorage.getItem('userData'))==null){
 		console.log("New Session !!")
 	}
@@ -27,8 +32,8 @@ $(document).ready(async function () {
 		var present = new Date().getTime();
 		var timePassed= (present - userData.timeStamp)/1000;
 		//console.log(timeStamp);
-		console.log(present);
-		console.log(timePassed);
+		console.log("Present time is : " + present);
+		console.log("Session time : " + timePassed);
 		if(timePassed < waitingTime){
 			//timeout function defined in userModal.js
 			timeout(waitingTime-timePassed,userData.id);
@@ -50,22 +55,26 @@ $(document).ready(async function () {
 		$('#bookOut').show();
 		
 		// Get GPS location of User
-		
 		if($('#userLocation').val()==='YourLocation'){
-			if(navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(async (position) => {
+			$.ajax({
+				method: "GET",
+				url: "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572",
+				success: function(res,status,xhr){
+					const userData = JSON.parse(res);
 					pickupObj = {
 						pickupPoint: 'custom',
 						location: {
-							lat: position.coords.latitude,
-							lng: position.coords.longitude
+							lat: userData.latitude,
+							lng: userData.longitude,
 						}
 					};
-					uniqueId = await bookController(pickupObj);
-				});
-			} else {
-				alert('Geolocation is not supported by this browser.');
-			  }
+				},
+				error: function(xhr) {
+					console.log("Your location could'nt be found.");
+					alert("Error");
+				},
+			});
+			uniqueId = await bookController(pickupObj);
 		}
 		else{
 			pickupObj = {
@@ -75,7 +84,7 @@ $(document).ready(async function () {
 			};
 			uniqueId = await bookController(pickupObj);
 		}	
-		}
+	  }
 
 	});
 
@@ -93,3 +102,4 @@ $(document).ready(async function () {
 	//markers = initMarkers(3);
 	//socket.on('driverInfo', updateLocation);
 });
+}

@@ -4,7 +4,7 @@
 var button = 0;
 var myUsers = [];
 var notMyUsers = [];
-
+function driverInfoView(){
 $(document).ready(async function () {
 
 	//Increment and Decrement Listeners - Defined in driverInfoView.js
@@ -26,6 +26,7 @@ $(document).ready(async function () {
 	});
 
 	$("#allUsers").on("click", () => {
+		var driverData = JSON.parse(localStorage.getItem('driverData'));
 		if(driverData.destination != null){
 			if(button!=0){
 				button = 0;
@@ -38,14 +39,16 @@ $(document).ready(async function () {
 		}
 	});
 	$("#myUsers").on("click", () => {
+		var driverData = JSON.parse(localStorage.getItem('driverData'));
 		if(typeof driverData.destiniation != undefined){
 			if(driverData.destination != null){
 				if(button==0){
+					console.log("Filtering my users");
 					button = 1;
 					notMyUsers=allUsers.filter(user => user.destination != driverData.destination );
 					let numOfUsers = notMyUsers.length;
-					for(let i=0; i<numOfUsers.length;i++){
-						removeMarker(notMyUsers[i]);
+					for(let i=0; i<numOfUsers;i++){
+						removeUserMarker(notMyUsers[i]);
 					}
 				}
 			}
@@ -58,6 +61,7 @@ $(document).ready(async function () {
 		}
 	});
 });
+}
 
 function selectOption(place){
 	if(place=="LBC"){

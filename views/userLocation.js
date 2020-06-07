@@ -7,8 +7,12 @@ function updateDriverTemplate(driverData){
 	/// Complete the code....
 }
 
-// function updateLocation(data) {
-// 	console.log(data);
+// function addDriverTemplate(driverData){
+// 	$("#driverDiplay").append("<div class = "card" style= "width: 18rem;" ><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>");
+// }
+
+
+/* // 	console.log(data);
 // 	if (data.id < 3) {
 // 		let latlng = new google.maps.LatLng(data.location.lat, data.location.lng);
 // 		markers[data.id].setPosition(latlng);
@@ -33,6 +37,6 @@ function updateDriverTemplate(driverData){
 // 				break;
 // 		}
 // 	}
-// }
+// } */
 
 
