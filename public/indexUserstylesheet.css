@@ -1,7 +1,7 @@
 
        /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */ 
-        #map {
+         #map {
             height: 63vh;
             /* The height is 600 pixels */
             width: 100%;
@@ -46,11 +46,17 @@
             margin-left: 15vw;
             margin-right: 15vw;
         } 
+        #unBook {
+            height: 5.5vh;
+        }
 
+        #gotIn{
+            height: 5.5vh;
+        }
         .card-deck{
             margin : 5px 15px 25px 15px;
             height : 18vh; 
-            font-size : 1.4vh;
+            font-size : 1.5vh;
 
         }
 
